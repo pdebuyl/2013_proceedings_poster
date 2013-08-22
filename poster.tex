@@ -6,17 +6,74 @@
 \usepackage{graphicx}
 \usepackage{url}
 \usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
 
 % for xdvi:  -paper 841mmx1189mm
 % dvips -T 841mm,1189mm -o poster.ps poster.dvi
 
-%\definecolor{BoxCol}{rgb}{0.9,0.9,0.9}
+\definecolor{lightgrey}{rgb}{0.940,0.940,0.940}
 % uncomment for grey background to \section boxes 
 % for use with default option boxedsections
 
 %\definecolor{BoxCol}{rgb}{0.9,0.9,1}
 % uncomment for light blue background to \section boxes 
 % for use with default option boxedsections
+\usepackage{xkeyval}
+
+\makeatletter
+
+\define@key{mybox}{corners}{\def\my@corners{#1}}
+\define@key{mybox}{color}{\def\bg@color{#1}}
+\define@key{mybox}{width}{\setlength\mybox@width{#1}}
+\define@key{mybox}{position}{\def\box@position{#1}}
+\define@key{mybox}{innerposition}{\def\box@innerposition{#1}}
+\define@key{mybox}{opacity}{\def\box@opacity{#1}}
+\define@key{mybox}{height}{\def\box@height{#1}}
+\newbox\my@tempbox
+\newlength\my@height
+\newlength\my@width
+\newlength\mybox@width
+\newlength\innerbox@width
+\newlength\box@heightlgth
+
+\newcommand{\mybox}[2][]{%
+  \setlength\mybox@width{\linewidth}%
+  \def\box@position{T}%
+  \def\box@innerposition{s}%
+  \def\box@opacity{0.75}%
+  \def\bg@color{gray!25}%
+  \def\my@corners{2mm}%
+  \let\box@height\@empty
+  \setkeys{mybox}{#1}%
+  \setlength\innerbox@width{\mybox@width}%
+  \advance\innerbox@width by -2mm%
+  \setbox\my@tempbox=\hbox{%
+  \ifx\box@height\@empty%
+    \begin{minipage}{\innerbox@width}%
+  \else%
+    \setlength\box@heightlgth{\box@height}%
+    \advance\box@heightlgth by -\my@corners%
+    \advance\box@heightlgth by -1.7ex%
+    \begin{minipage}[\box@position][\box@heightlgth][\box@innerposition]%
+	    {\innerbox@width}%
+  \fi%
+      #2%
+    \end{minipage}%
+  }%
+  \my@height=\ht\my@tempbox%
+  \my@width=\wd\my@tempbox%
+  %
+  \advance\my@width by 2mm%
+  %
+  \begin{minipage}[\box@position]{\mybox@width}%
+  \begin{tikzpicture}[rounded corners=\my@corners, fill=\bg@color]
+      \fill[fill opacity=\box@opacity, scale=0.5]
+      	(-\my@width,-2\my@height) rectangle (\my@width, 2\my@height);
+      \path (0,0) node {\box\my@tempbox} ;
+  \end{tikzpicture}%
+  \end{minipage}%
+}
 
 \definecolor{BoxCol}{rgb}{1,1,1}
 % uncomment for dark blue \section text 
@@ -86,6 +143,7 @@ fork button.
   contribution.\\
 
   You should then {\tt git add} the file and {\tt git commit} to register your
+  to register your
   addition. Figures should be added as well. Edit and commit until the paper is
   ready. The script {\tt make\_paper.sh} can be used to produce a pdf file in
   ``output/your\_name/paper.pdf''.
@@ -140,6 +198,34 @@ fork button.
 If you need support, please contact Nelle Varoquaux \url{nelle.varoquaux@gmail.com} or Pierre de Buyl \url{pdebuyl@ulb.ac.be}
 
 \end{multicols}
+
+\vspace*{5em}
+\begin{center}
+\begin{minipage}{.5\linewidth}
+\section{Summary}
+\vspace*{-0.9em}
+\mybox[corners=0pt, color=lightgrey, width=\linewidth]{
+\begin{itemize}
+\item Fork \url{https://github.com/euroscipy/euroscipy\_proceedings}   
+\item Clone the fork: 
+  \begin{itemize}
+    \item \texttt{git clone https://github.com/euroscipy/euroscipy\_proceedings}
+
+  \end{itemize}
+\item Write your paper in \texttt{papers/00\_lastname.rst}
+\item Commit and push it:
+  \begin{itemize}
+  \item \texttt{git add papers/00\_lastname.rst}
+  \item \texttt{git commit -m "My paper"}
+  \item \texttt{git push origin master}
+  \end{itemize}
+
+\item Create the pull request and wait for feedback.
+\end{itemize}
+
+}
+\end{minipage}
+\end{center}
 
 \end{document}
 
