@@ -1,0 +1,145 @@
+\documentclass[portrait]{sciposter}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage[utf8]{inputenc}
+
+% for xdvi:  -paper 841mmx1189mm
+% dvips -T 841mm,1189mm -o poster.ps poster.dvi
+
+%\definecolor{BoxCol}{rgb}{0.9,0.9,0.9}
+% uncomment for grey background to \section boxes 
+% for use with default option boxedsections
+
+%\definecolor{BoxCol}{rgb}{0.9,0.9,1}
+% uncomment for light blue background to \section boxes 
+% for use with default option boxedsections
+
+\definecolor{BoxCol}{rgb}{1,1,1}
+% uncomment for dark blue \section text 
+
+
+\title{EuroSciPy 2013 Proceedings}
+
+% Note: only give author names, not institute
+\author{}
+ 
+% insert correct institute name
+\institute{}
+
+ % shows author email address below institute
+
+
+%\date is unused by the current \maketitle
+
+% The following commands can be used to alter the default logo settings
+%\noleftlogo
+\leftlogo[1.2]{euroscipy_logo}  % defines logo to left of title (with scale factor)
+\rightlogo[1.2]{euroscipy_logo}  % same but on right
+%\norightlogo
+% NOTE: This will require presence of files logoWenI.png and RuGlogo.png, 
+% or other supported format in the current directory  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Begin of Document
+
+\begin{document}
+
+%define conference poster is presented at (appears as footer)
+\conference{{\large EuroSciPy 2013}}
+
+\maketitle
+
+%%% Begin of Multicols-Enviroment
+\begin{multicols}{2}
+
+If you have a github account, go to github.com and register.\\
+
+Go to \url{https://github.com/euroscipy/euroscipy_proceedings} and click the
+fork button.
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{fork_draw}
+  \end{figure}
+
+  You should now be on your {\em own} account and your {\em own} fork of
+  euroscipy\_proceedings.
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{myfork_draw}
+  \end{figure}
+
+  You may now clone (i.e. get the code on your computer) the repository, from
+  your {\em own} version of it. Replace pdebuyl by your github login.
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{txt}
+  \end{figure}
+
+  To add your contribution, create a directory in ``papers'' with your
+  name. Using the paper ``00\_vanderwalt.rst'' as a template, add and edit your
+  contribution.\\
+
+  You should then ``git add'' the file and ``git commit'' to register your
+  addition. Figures should be added as well. Edit and commit until the paper is
+  ready. The script ``make\_paper.sh'' can be used to produce a pdf file in
+  ``output/your\_name/paper.pdf''.
+
+  Once you are satisfied, ``git push'' your contribution. It now lies within
+  {\em your own} github account.
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=.6\linewidth]{txt_push}
+  \end{figure}
+
+  Your version has a ``pull request'' list, click on that.
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{mycommit}
+  \end{figure}
+
+  In the pull request list, there is a ``new Pull Request'' button.
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\linewidth]{mypr}
+  \end{figure}
+
+  The ``pull request'' is from your account to the euroscipy account, create it.
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{mypr_create}
+  \end{figure}
+
+
+  Once you have submitted a pull request, the refereeing will start. Refereeing
+  will be done on the pull request and will be public.
+
+\end{multicols}
+
+\begin{multicols}{2}
+  As a reminder, the requirements are:
+
+
+  \begin{itemize}
+  \item IEEETran (often packaged as ``texlive-publishers'', or download from
+   CTAN \url{http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/}
+  \item AMSmath LaTeX classes (included in most LaTeX distributions)
+  \item ``docutils'' 0.8 or later (``easy\_install docutils'')
+  \item ``pygments'' for code highlighting (``easy\_install pygments'')
+  \end{itemize}
+
+If you need support, please contact Nelle Varoquaux \url{nelle.varoquaux@gmail.com} or Pierre de Buyl \url{pdebuyl@ulb.ac.be}
+
+\end{multicols}
+
+\end{document}
+
